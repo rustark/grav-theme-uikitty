@@ -1,7 +1,7 @@
 name: UIKitty
-version: 1.0.0
+version: 1.0.1
 description: "**UIkit 2.27.5** is a lightweight and modular front-end framework for developing fast and powerful web interfaces."
-icon: empire
+icon: paw
 author:
   name: Dmitry Yakushev
   email: rustark.com@gmail.com
@@ -93,6 +93,17 @@ form:
       accept:
         - image/*
 
+    custom_logo_width:
+      type: text
+      toggleable: true
+      label: ADMIN.IMG_WIDTH
+      size: small
+      placeholder: px
+      validate:
+        type: int
+        min: 0
+        max: 500
+
     custom_logo_mobile:
       type: file
       label: ADMIN.LOGO_MOBILE
@@ -101,6 +112,17 @@ form:
       multiple: false
       accept:
         - image/*
+
+    custom_logo_mobile_width:
+      type: text
+      toggleable: true
+      label: ADMIN.IMG_WIDTH
+      size: small
+      placeholder: px
+      validate:
+        type: int
+        min: 0
+        max: 500
 
     logo_center:
       type: toggle
@@ -133,14 +155,14 @@ form:
       fields:
         .text:
           type: text
-          label: ADMIN.BUTTON_TEXT
+          label: ADMIN.TEXT
         .url:
           type: text
           default: '#modal-ordering'
-          label: ADMIN.BUTTON_URL
+          label: ADMIN.URL
         .class:
           type: select
-          label: ADMIN.BLOCK_TYPE
+          label: ADMIN.TYPE
           default: default
           options:
             default: 'default'
@@ -152,7 +174,8 @@ form:
     sticky_menu:
       type: toggle
       label: ADMIN.MENU_STICKY
-      highlight: 1
+      highlight: 0
+      default: 0
       options:
         1: PLUGIN_ADMIN.YES
         0: PLUGIN_ADMIN.NO

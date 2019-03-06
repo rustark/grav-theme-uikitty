@@ -65,7 +65,7 @@ en:
     PRODUCTION_HELP: When enabled, template will render with minified CSS
     QUOTES: Quotes
     RADIUS: Radius
-    ROUNDED: Скругления
+    ROUNDED: Rounded
     SLIDENAV: Slidenav
     SLIDENAV_GUTTER: Gutter
     SLIDENAV_TYPE: Slidenav type
@@ -75,6 +75,7 @@ en:
     SOCIAL_LINKS: Social links
     SUBTEXT: Subtext
     TEXT: Text
+    THEME_DESC: "**UIkit 2.27.5** is a lightweight and modular front-end framework for developing fast and powerful web interfaces."
     TITLE: Title
     TYPE: Type
     URL: Link
@@ -182,6 +183,7 @@ ru:
     SOCIAL_LINKS: Социальные ссылки
     SUBTEXT: Описание
     TEXT: Текст
+    THEME_DESC: "**UIkit 2.27.5** представляет собой легкий и модульный front-end фреймворк для разработки быстрых и мощных веб-интерфейсов."
     TITLE: Заголовок
     TYPE: Тип
     URL: Ссылка
