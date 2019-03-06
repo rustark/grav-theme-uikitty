@@ -1,0 +1,207 @@
+name: UIKitty
+version: 1.0.0
+description: "**UIkit 2.27.5** is a lightweight and modular front-end framework for developing fast and powerful web interfaces."
+icon: empire
+author:
+  name: Dmitry Yakushev
+  email: rustark.com@gmail.com
+  url: https://rustark.com
+homepage: https://github.com/rustark/grav-theme-uikitty
+demo: https://demo.rustark.com
+keywords: uikit, theme, core, modern, fast, responsive, html5, css3
+bugs: https://github.com/rustark/grav-theme-uikitty/issues
+license: MIT
+
+form:
+  validation: loose
+  fields:
+
+    components_mode:
+      type: select
+      label: ADMIN.COMPONENTS
+      markdown: true
+      description: ADMIN.COMPONENTS_DESCRIPTION
+      default: none
+      options:
+        none: 'none'
+        collections: 'collections'
+        full: 'full'
+    
+    production_mode:
+      type: toggle
+      label: ADMIN.PRODUCTION
+      help: ADMIN.PRODUCTION_HELP
+      highlight: 1
+      default: 1
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+
+    grid:
+      type: select
+      label: ADMIN.GRID
+      default: large
+      options:
+        large: 'large'
+        medium: 'medium'
+        small: 'small'
+        collapse: 'collapse'
+
+    rounded:
+      type: toggle
+      label: ADMIN.ROUNDED
+      highlight: 1
+      default: 1
+      options:
+          1: PLUGIN_ADMIN.YES
+          0: PLUGIN_ADMIN.NO
+    
+    radius:
+      type: range
+      label: ADMIN.RADIUS
+      size: long
+      default: 0
+      validate:
+        min: 0
+        max: 10
+    
+    social_icons:
+      name: buttons
+      type: list
+      label: ADMIN.SOCIAL_LINKS
+      fields:
+        .icon:
+          type: text
+          label: ADMIN.ICON
+        .url:
+          type: text
+          label: ADMIN.URL
+    
+    menu:
+      type: section
+      title: ADMIN.MENU
+      underline: true
+
+    custom_logo:
+      type: file
+      label: ADMIN.LOGO
+      size: large
+      destination: 'theme://images/logo'
+      multiple: false
+      accept:
+        - image/*
+
+    custom_logo_mobile:
+      type: file
+      label: ADMIN.LOGO_MOBILE
+      size: large
+      destination: 'theme://images/logo'
+      multiple: false
+      accept:
+        - image/*
+
+    logo_center:
+      type: toggle
+      label: ADMIN.LOGO_CENTER
+      highlight: 1
+      default: 1
+      options:
+        1: PLUGIN_ADMIN.YES
+        0: PLUGIN_ADMIN.NO
+      validate:
+        type: bool
+
+    text:
+      type: text
+      label: ADMIN.TEXT
+    
+    social_type:
+      type: select
+      label: ADMIN.SOCIAL_LINKS
+      default: none
+      options:
+        none: 'none'
+        uk-icon-hover: 'uk-icon-hover'
+        uk-icon-button: 'uk-icon-button'
+
+    buttons:
+      name: buttons
+      type: list
+      label: ADMIN.BUTTONS
+      fields:
+        .text:
+          type: text
+          label: ADMIN.BUTTON_TEXT
+        .url:
+          type: text
+          default: '#modal-ordering'
+          label: ADMIN.BUTTON_URL
+        .class:
+          type: select
+          label: ADMIN.BLOCK_TYPE
+          default: default
+          options:
+            default: 'default'
+            primary: 'primary'
+            success: 'success'
+            danger: 'danger'
+            link: 'link'
+
+    sticky_menu:
+      type: toggle
+      label: ADMIN.MENU_STICKY
+      highlight: 1
+      options:
+        1: PLUGIN_ADMIN.YES
+        0: PLUGIN_ADMIN.NO
+      validate:
+        type: bool
+
+    menu_big:
+      type: toggle
+      label: ADMIN.MENU_BIG
+      highlight: 0
+      default: 0
+      options:
+        1: PLUGIN_ADMIN.YES
+        0: PLUGIN_ADMIN.NO
+      validate:
+        type: bool
+
+    menu_dots:
+      type: toggle
+      label: ADMIN.MENU_DOTS
+      highlight: 0
+      default: 0
+      options:
+        1: PLUGIN_ADMIN.YES
+        0: PLUGIN_ADMIN.NO
+      validate:
+        type: bool
+
+    footer:
+      type: section
+      title: ADMIN.FOOTER
+      underline: true
+
+    footer_type:
+      type: select
+      label: ADMIN.TYPE
+      default: large
+      options:
+        none:      'none'
+        default:   'default'
+        muted:     'muted'
+        primary:   'primary'
+        secondary: 'secondary'
+    
+    social_type_footer:
+      type: select
+      label: ADMIN.SOCIAL_LINKS
+      default: none
+      options:
+        none: 'none'
+        uk-icon-hover: 'uk-icon-hover'
+        uk-icon-button: 'uk-icon-button'

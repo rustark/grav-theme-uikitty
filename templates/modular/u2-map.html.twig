@@ -1,0 +1,58 @@
+{# Theme config #}
+{% set theme_config = attribute(config.themes, config.system.pages.theme) %}
+{% set lang = grav.language.getActive ?: theme_config.default_lang %}
+
+<div id="gmap" style="width: {{ page.header.width }}; height: {{ page.header.height }}"></div>
+<script>
+    function initMap() {
+        var uluru = { lat: {{ page.header.latitude }}, lng: {{ page.header.longitude }} };
+        var map = new google.maps.Map(document.getElementById('gmap'), {
+            zoom: {{ header.zoom }},
+            {{ header.style ? 'styles:' ~ header.style ~ ',' }}
+            //disableDefaultUI: true,
+            zoomControl: true,
+            zoomControlOptions: {
+                position: google.maps.ControlPosition.LEFT_TOP
+            },
+            mapTypeControl: false,
+            scaleControl: false,
+            streetViewControl: false,
+            rotateControl: false,
+            fullscreenControl: true,
+            fullscreenControlOptions: {
+                position: google.maps.ControlPosition.RIGHT_TOP
+            },
+            center: uluru
+        });
+
+        {% if header.svg %}
+        var image = {
+            url: '{{ page.media[page.header.svg].url }}',
+            size: new google.maps.Size( {{ page.header.svg_width }}, {{ page.header.svg_height }} ),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point( {{ page.header.svg_width / 2 }}, {{ page.header.svg_height / 2 }} ),
+        };
+        {% else %}
+        var image = '{{ page.media[page.header.icon].url }}';
+        {% endif %}
+
+        var marker = new google.maps.Marker({
+            icon: image,
+            title: '{{ page.title }}',
+            position: uluru,
+            map: map
+        });
+
+        {% if header.info %}
+        var contentString = '{{ header.info }}';
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+        marker.addListener('click', function() {
+            infowindow.open(map, marker);
+        });
+        {% endif %}
+    }
+</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ page.header.api }}&language={{ lang }}&callback=initMap"></script>

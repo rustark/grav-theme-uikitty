@@ -1,0 +1,31 @@
+{# macro button(url, text, class) %}
+    {% set rounded = theme_var('rounded') ? ' uk-border-rounded' %}
+    <a class="uk-button {{ class|default('uk-button-base') ~ rounded }}" href="{{ url|default('#') }}">{{ text }}</a>
+{% endmacro #}
+
+{% macro uk_button(url, text, class) %}
+    {% set rounded = theme_var('rounded') ? ' uk-border-rounded' %}
+    <a class="uk-button {{ class|default('uk-button-base') ~ rounded }}" href="{{ url|default('#') }}"{% if url[:6]|lower == '#modal' %} data-uk-modal="{center:true}"{% elseif url[:1]|lower == '#' %} data-uk-smooth-scroll{% endif %}>{{ text }}</a>
+{% endmacro %}
+
+{% macro image(image, width, height) %}
+    {% set rounded = theme_var('rounded') ? ' uk-border-rounded' %}
+    {% if width and height %}
+        {{ image.cropZoom(width, height).html(null, null, rounded) }}
+    {% else %}
+        {{ image.html(null, null, rounded) }}
+    {% endif %}
+{% endmacro %}
+
+{% macro image_lightbox(image, width, height, caption) %}
+    {% set rounded = theme_var('rounded') ? ' uk-border-rounded' %}
+    {% if width and height %}
+        <a href="{{ image.cropZoom(width, height).url }}" data-uk-lightbox="{group:'{{ 'lightbox' ~ page.slug }}'}" title="{{ caption|default(null) }}">
+            {{ image.cropZoom(width, height).html(null, null, rounded) }}
+        </a>
+    {% else %}
+        <a href="{{ image.url }}" data-uk-lightbox="{group:'{{ 'lightbox' ~ page.slug }}'}">
+            {{ image.html(null, null, rounded) }}
+        </a>
+    {% endif %}
+{% endmacro %}

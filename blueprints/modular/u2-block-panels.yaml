@@ -1,0 +1,110 @@
+title: Panel
+'@extends': default
+
+form:
+  fields:
+    tabs:
+      fields:
+
+        panels:
+          type: tab
+          title: ADMIN.PANELS
+          fields:
+
+            panels:
+              type: section
+              title: ADMIN.PANELS
+              underline: true
+
+            header.columns:
+              name: features
+              type: list
+              style: vertical
+              fields:
+
+                .type:
+                  type: select
+                  label: ADMIN.PANEL_TYPE
+                  default: default
+                  options:
+                    default: 'default'
+                    box: 'box'
+                    primary: 'primary'
+                    secondary: 'secondary'
+                    hover: 'hover'
+                    header: 'header'
+                    space: 'space'
+
+                .badge_type:
+                  type: select
+                  label: ADMIN.BADGE_TYPE
+                  default: default
+                  options:
+                    default: 'default'
+                    success: 'success'
+                    warning: 'warning'
+                    danger: 'danger'
+
+                .badge:
+                  type: text
+                  label: ADMIN.BADGE
+
+                .img:
+                  type: filepicker
+                  folder: '@self'
+                  label: ADMIN.IMG
+                  preview_images: true
+                  accept:
+                    - .png
+                    - .jpg
+                    - .gif
+
+                .icon:
+                  type: text
+                  label: ADMIN.ICON
+
+                .header:
+                  type: text
+                  label: ADMIN.HEADER
+
+                .text:
+                  type: textarea
+                  label: ADMIN.TEXT
+
+                .buttons:
+                  name: buttons
+                  type: list
+                  label: ADMIN.BUTTONS
+                  fields:
+
+                    .text:
+                      type: text
+                      label: ADMIN.TEXT
+
+                    .url:
+                      type: text
+                      default: '#modal-ordering'
+                      label: ADMIN.URL
+
+                    .class:
+                      type: select
+                      label: ADMIN.TYPE
+                      default: default
+                      options:
+                        default: 'default'
+                        primary: 'primary'
+                        success: 'success'
+                        danger: 'danger'
+                        link: 'link'
+
+          import-items@:
+            type: /partials/items
+            context: blueprints://pages
+          
+          import-block@:
+            type: /partials/block
+            context: blueprints://pages
+          
+          import-header@:
+            type: /partials/header
+            context: blueprints://pages

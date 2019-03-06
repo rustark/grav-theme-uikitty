@@ -1,0 +1,62 @@
+extends@: default
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+      fields:          
+
+        gallery:
+          type: tab
+          title: ADMIN.GALLERY
+          fields:
+
+            gallery:
+              type: section
+              title: ADMIN.GALLERY
+              underline: true
+
+            header.lightbox:
+              type: toggle
+              label: ADMIN.LIGHTBOX
+              highlight: 0
+              default: 0
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+            
+            header.gallery:
+              name: features
+              type: list
+              style: vertical
+              label: ADMIN.PANELS
+              fields:
+
+                .img:
+                  type: filepicker
+                  folder: '@self'
+                  label: ADMIN.IMG
+                  preview_images: true
+                  accept:
+                    - .png
+                    - .jpg
+                    - .gif
+
+                .title:
+                  type: text
+                  label: ADMIN.DESCRIPTION
+
+          import-items@:
+            type: /partials/items
+            context: blueprints://pages
+          
+          import-block@:
+            type: /partials/block
+            context: blueprints://pages
+          
+          import-header@:
+            type: /partials/header
+            context: blueprints://pages

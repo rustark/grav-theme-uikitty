@@ -1,0 +1,39 @@
+{# Grid #}
+{% set grid_size = theme_var('grid') %}
+
+{# Set block background color #}
+{% if page.header.block == 'muted' %}
+    {% set uk_block = ' uk-block uk-block-muted' %}
+{% elseif page.header.block == 'primary' %}
+    {% set uk_block = ' uk-block uk-block-primary uk-contrast' %}
+{% elseif page.header.block == 'secondary' %}
+    {% set uk_block = ' uk-block uk-block-secondary uk-contrast' %}
+{% else %}
+    {% set uk_block = ' uk-block' %}
+{% endif %}
+
+{# Set contrast class #}
+{% set contrast = page.header.block == "primary" or page.header.block == "secondary" ? ' uk-contrast' %}
+
+<section
+    id="tm{{ page.slug }}"
+    class="tm-section uk-cover-background{{ uk_block }}"
+    {{ page.header.bg_image ? 'style="background-image: url(' ~ page.media[page.header.bg_image].url ~ ')"' }}
+    {{ page.header.parallax != 0 ? 'data-uk-parallax="{bg:' ~ page.header.parallax ~ '}"'}}
+    >
+
+    <article class="uk-container uk-container-center {{ page.header.body_classes }}">
+
+        {{ page.header.header ? '<h3 class="uk-article-title">' ~ page.header.header ~ '</h3>' }}
+        {{ page.header.description ? '<p class="uk-article-lead uk-margin-large-bottom' ~ contrast ~ '">' ~ page.header.description ~ '</p>' }}
+
+        {# include "templates/formdata.html.twig" with { form: forms(page.header.form_id) } #}
+
+        {% include "forms/form.html.twig" with { form: forms(page.header.form_id) } %}
+
+    </article>
+</section>
+
+{% if page.header.parallax != '' %}
+    {% do assets.addJs('theme://js/components/parallax.min.js', {'priority':102, 'group':'bottom'}) %}
+{% endif %}

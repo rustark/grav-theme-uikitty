@@ -1,0 +1,124 @@
+title: Base
+'@extends': default
+
+form:
+  fields:
+    tabs:
+      fields:
+
+        columns:
+          type: tab
+          title: ADMIN.COLUMNS
+          fields:
+
+            columns:
+              type: section
+              title: ADMIN.COLUMNS
+              underline: true
+
+            header.col_classes:
+              type: text
+              label: ADMIN.CLASS
+
+            header.columns:
+              name: features
+              type: list
+              style: vertical
+              label: ADMIN.COLUMNS
+              fields:
+
+                .img:
+                  type: filepicker
+                  folder: '@self'
+                  label: ADMIN.IMG
+                  preview_images: true
+                  accept:
+                    - .png
+                    - .jpg
+                    - .gif
+
+                .header:
+                  type: text
+                  label: ADMIN.HEADER
+
+                .description:
+                  type: text
+                  label: ADMIN.DESCRIPTION
+
+                .meta:
+                  type: text
+                  label: ADMIN.META
+
+                .text:
+                  classes: frontmatter
+                  type: editor
+                  label: ADMIN.TEXT
+                  markdown: true
+                  codemirror:
+                    mode: 'gfm'
+
+                .other:
+                  type: fieldset
+                  title: ADMIN.OTHER
+                  icon: cog
+                  collapsed: true
+                  collapsible: true
+                  fields:
+
+                    .other.classes:
+                      type: text
+                      label: ADMIN.CLASS
+
+                    .other.buttons:
+                      name: buttons
+                      type: list
+                      style: vertical
+                      label: ADMIN.BUTTONS
+                      fields:
+
+                        .text:
+                          type: text
+                          label: ADMIN.TEXT
+
+                        .url:
+                          type: text
+                          default: '#modal-ordering'
+                          label: ADMIN.URL
+
+                        .class:
+                          type: select
+                          label: ADMIN.TYPE
+                          default: default
+                          options:
+                            default: 'default'
+                            primary: 'primary'
+                            success: 'success'
+                            danger: 'danger'
+                            link: 'link'
+                    
+                    .other.icons:
+                      name: buttons
+                      type: list
+                      style: vertical
+                      label: ADMIN.ICONS
+                      fields:
+
+                        .icon:
+                          type: text
+                          label: ADMIN.ICON
+                          
+                        .text:
+                          type: text
+                          label: ADMIN.TEXT
+
+          import-items@:
+            type: /partials/items
+            context: blueprints://pages
+          
+          import-block@:
+            type: /partials/block
+            context: blueprints://pages
+          
+          import-header@:
+            type: /partials/header
+            context: blueprints://pages

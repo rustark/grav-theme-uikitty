@@ -1,0 +1,10 @@
+form:
+  fields:
+
+    header.header:
+      type: text
+      label: ADMIN.TITLE
+
+    header.description:
+      type: textarea
+      label: ADMIN.DESCRIPTION

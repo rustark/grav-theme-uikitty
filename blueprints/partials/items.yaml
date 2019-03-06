@@ -1,0 +1,50 @@
+form:
+  fields:
+
+    items:
+      title: ADMIN.ITEMS
+      type: section
+      underline: true
+
+    header.columns_count:
+      type: range
+      label: ADMIN.COL_COUNT
+      default: 2
+      validate:
+        min: 1
+        max: 6
+
+    header.divider:
+      type: toggle
+      label: ADMIN.DIVIDER
+      highlight: 0
+      default: 0
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+
+    header.img_width:
+      type: text
+      toggleable: true
+      label: ADMIN.IMG_WIDTH
+      size: small
+      help: ADMIN.IMG_WIDTH_PANEL
+      placeholder: px
+      validate:
+        type: int
+        min: 0
+        max: 5000
+
+    header.img_height:
+      type: text
+      toggleable: true
+      label: ADMIN.IMG_HEIGHT
+      size: small
+      help: ADMIN.IMG_HEIGHT_PANEL
+      placeholder: px
+      validate:
+        type: int
+        min: 0
+        max: 5000

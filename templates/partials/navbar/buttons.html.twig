@@ -1,0 +1,28 @@
+{% import 'macros/macros.html.twig' as macros %}
+
+{% set buttons = theme_var('buttons') ? theme_var('buttons') %}
+{% set social_icons = theme_var('social_icons') ? theme_var('social_icons') %}
+{% set social_type = theme_var('social_type') ? theme_var('social_type') %}
+{% set text = theme_var('text') ? theme_var('text') %}
+
+<div class="uk-navbar-flip">
+	{{ text ? '<div class="uk-navbar-content uk-visible-large">' ~ text ~ '</div>' }}
+
+	{% if social_type != 'none' %}
+	<div class="uk-navbar-content">
+		{% for s in social_icons %}
+			<a href="{{ s.url }}" class="{{ social_type }} uk-margin-small-left uk-icon-{{ s.icon }}"></a>
+		{% endfor %}
+	</div>
+	{% endif %}
+
+	{% if buttons %}
+	<div class="uk-navbar-content uk-padding-remove">
+		{% for btn in buttons %}	
+			{% set class = btn.class ? ' uk-button-' ~ btn.class %}
+			{{ macros.uk_button(btn.url, btn.text, 'uk-button-large uk-hidden-small' ~ class) }}
+			{{ macros.uk_button(btn.url, btn.text, 'uk-button uk-visible-small' ~ class) }}
+		{% endfor %}
+	</div>
+	{% endif %}
+</div>

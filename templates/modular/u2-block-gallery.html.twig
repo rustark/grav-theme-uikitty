@@ -1,0 +1,81 @@
+{% import 'macros/macros.html.twig' as macros %}
+
+{% set rounded = theme_var('rounded') ? ' uk-border-rounded' %}
+{% set grid_size = theme_var('grid') ? ' uk-grid-' ~ theme_var('grid') %}
+{% set margin_top = theme_var('grid') ? ' uk-margin-' ~ theme_var('grid') ~ '-top' %}
+
+{% set contrast = page.header.block == "primary" or page.header.block == "secondary" ? ' uk-contrast' %}
+{% set count = page.header.columns_count %}
+{% set divider = page.header.divider ? ' uk-grid-divider' %}
+{% set gallery = page.header.gallery %}
+{% set lightbox = page.header.lightbox ? true %}
+
+{# Set block background color #}
+{% if page.header.block == 'muted' %}
+    {% set uk_block = ' uk-block uk-block-muted' %}
+{% elseif page.header.block == 'primary' %}
+    {% set uk_block = ' uk-block uk-block-primary uk-contrast' %}
+{% elseif page.header.block == 'secondary' %}
+    {% set uk_block = ' uk-block uk-block-secondary uk-contrast' %}
+{% else %}
+    {% set uk_block = ' uk-block' %}
+{% endif %}
+
+{# Set image size #}
+{% set img_width  = page.header.img_width %}
+{% set img_height = page.header.img_height %}
+
+<section
+    id="tm{{ page.slug }}"
+    class="tm-section uk-cover-background{{ uk_block }}"
+    {{ page.header.bg_image ? 'style="background-image: url(' ~ page.media[page.header.bg_image].url ~ ')"' }}
+    {{ page.header.parallax != 0 ? 'data-uk-parallax="{bg:' ~ page.header.parallax ~ '}"'}}
+    >
+
+    <article class="uk-article uk-container uk-container-center {{ page.header.body_classes }}">
+
+        {{ page.header.header ? '<h3 class="uk-article-title">' ~ page.header.header ~ '</h3>' }}
+        {{ page.header.description ? '<p class="uk-article-lead' ~ contrast ~ '">' ~ page.header.description ~ '</p>' }}
+        {{ page.content ? page.content }}
+
+            {% if gallery %}
+                {% for image in gallery|batch(count, null) %}
+                    <div class="uk-grid{{ divider ~ margin_top ~ grid_size }}" data-uk-grid-margin="">                    
+                        {% for i in image %}
+                        <div class="uk-width-medium-1-{{ count }}">
+                            {% if lightbox %}
+                                {{ macros.image_lightbox(page.media[i.img], img_width, img_height, i.title) }}
+                            {% else %}
+                                {{ macros.image(page.media[i.img], img_width, img_height) }}
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                {% for image in page.media.images|batch(count, null) %}
+                    <div class="uk-grid{{ page.header.divider ? ' uk-grid-divider' }} {{ grid_size }}" data-uk-grid-margin="">                    
+                        {% for item in image %}
+                        <div class="uk-width-medium-1-{{ count }}">
+                            {% if lightbox %}
+                                {{ macros.image_lightbox(item, img_width, img_height) }}
+                            {% else %}
+                                {{ macros.image(item, img_width, img_height) }}
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+    </article>
+
+</section>
+
+{% if page.header.parallax != 0 %}
+    {% do assets.addJs('theme://js/components/parallax.min.js', {'priority':102, 'group':'bottom'}) %}
+{% endif %}
+
+{% if page.header.lightbox %}
+    {% do assets.addJs('theme://js/components/lightbox.min.js', {'priority':99, 'group':'bottom'}) %}
+{% endif %}

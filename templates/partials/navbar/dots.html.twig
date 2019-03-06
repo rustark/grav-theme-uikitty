@@ -1,0 +1,7 @@
+<div class="uk-flex uk-flex-middle uk-position-z-index uk-hidden-small uk-height-1-1 uk-margin-small-right" style="position: fixed; right: 0;">
+	<ul class="uk-dotnav uk-flex-column" data-uk-scrollspy-nav="{closest:'li', smoothscroll:true}">
+	{% for p in page.collection() %}
+		{{ p.header.menu ? '<li><a href="#tm' ~ p.slug ~ '">' ~ p.header.menu ~ '</a></li>' }}
+	{% endfor %}
+	</ul>
+</div>

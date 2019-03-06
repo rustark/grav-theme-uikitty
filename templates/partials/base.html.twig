@@ -1,0 +1,71 @@
+{% set components = theme_var('components_mode') %}
+{% set compress_css = theme_var('production_mode') ? '.min.css' : '.css' %}
+{% set compress_js = theme_var('production_mode') ? '.min.js' : '.js' %}
+{% set grid_size = theme_var('grid') %}
+{% set radius = theme_var('radius') %}
+{% set rounded = theme_var('rounded') ? ' uk-border-rounded' %}
+{% set social_icons = theme_var('social_icons') %}
+
+<!DOCTYPE html>
+<html lang="{{ grav.language.getActive ?: grav.config.site.default_lang }}">
+
+<head>
+{% block head deferred %}
+    <meta charset="utf-8" />
+    <title>{% if page.title %}{{ page.title|e('html') }} | {% endif %}{{ site.title|e('html') }}</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% include 'partials/metadata.html.twig' %}
+    {% include 'partials/favicons.html.twig' %}
+
+    <link rel="canonical" href="{{ page.url(true, true) }}" />
+{% endblock head %}
+
+{% block stylesheets %}
+    {% do assets.addCss('theme://css/uikit' ~ compress_css, 100) %}
+    {% do assets.addInlineCss('.uk-border-rounded{border-radius:' ~ radius ~ 'px !important}') %}
+    {# components #}
+    {% if components == 'full' %}
+        {% do assets.addCss('uikit-components-css', 10) %}
+    {% elseif components == 'collections' %}    
+        {% do assets.addCss('components-css', 93) %}
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {% do assets.addJs('jquery', 100) %}
+    {% do assets.addJs('theme://js/uikit' ~ compress_js, 99) %}
+    {# components #}
+    {% if components == 'full' %}
+        {% do assets.addJs('uikit-components-js', {group:'bottom'}) %}
+    {% elseif components == 'collections' %}    
+        {% do assets.addJs('components-js', {group:'bottom'}) %}
+    {% endif %}    
+{% endblock %}
+
+{% block assets deferred %}
+    {{ assets.css()|raw }}
+    {{ assets.js()|raw }}
+{% endblock %}
+</head>
+
+<body id="top" class="{{ page.header.body_classes }}">
+
+    {% block header deferred %}
+        {% include 'partials/navigation.html.twig' with {rounded: rounded} %}
+    {% endblock %}
+
+    {% block body %}
+        {% block content %}{% endblock %}
+    {% endblock %}
+
+    {% block footer %}
+        {% include 'partials/footer.html.twig' with {grid: grid_size, icons: social_icons} %}
+    {% endblock %}
+
+    {% block bottom %}
+        {{ assets.js('bottom')|raw }}
+    {% endblock %}
+
+</body>

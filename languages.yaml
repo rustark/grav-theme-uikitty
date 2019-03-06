@@ -1,0 +1,211 @@
+en:
+  ADMIN:
+    ARROWS: Arrows
+    ARROWS_CONTRAST: Arrows contrast
+    BADGE: Badge
+    BADGE_CLASS: Badge class
+    BADGE_TYPE: Badge type
+    BG_IMAGE: Background image
+    BLOCK: Block
+    BLOCKS: Blocks
+    BLOCK_TYPE: Block type
+    BUTTONS: Buttons
+    BUTTON_TEXT: Text button
+    BUTTON_URL: URL button
+    COLUMN: Column
+    COLUMNS: Columns
+    COL_COUNT: Count columns [1-6]
+    COMPONENTS: Components
+    COMPONENTS_DESCRIPTION: "Mode **collections** adds files from collections `components-css` and `components-js`. Mode **full** adds all scripts from folders `theme://css/components` and `theme://js/components`"
+    CONTRAST_FOOTER: Contrast footer
+    COPY: '| Made by <a href="http://rustark.com">DY</a>'
+    DEFAULT_LANG: Default lang
+    DESCRIPTION: Description
+    DIVIDER: Divider
+    FOOTER: Footer
+    GALLERY: Gallery
+    GOOGLE_MAP: Google map
+    GRID: Grid
+    HEADER: Header
+    HEIGHT: Height
+    ICON: Icon
+    ICONS: Icons
+    ICONS_HELP: "Place vector [icons](https://getuikit.com/v2/docs/icon.html) anywhere using an icon font"
+    ICON_TYPE: Icon type
+    IFRAME: Iframe video
+    IMG: Image
+    IMG_HEIGHT: Image height
+    IMG_HEIGHT_PANEL: Panel image height
+    IMG_WIDTH: Image width
+    IMG_WIDTH_PANEL: Panel image width
+    ITEM: Item
+    ITEMS: Items
+    LIGHTBOX: Lightbox
+    LINK: Link
+    LIST: List
+    LOGO: Logo
+    LOGO_CENTER: Logo center
+    LOGO_FOOTER: Footer logo
+    LOGO_MOBILE: Mobile logo
+    MENU: Menu
+    MENU_BIG: Big menu
+    MENU_DOTS: Dots menu
+    MENU_STICKY: Sticky menu
+    META: Meta
+    NAV: Nav
+    OTHER: Other
+    PANEL: Panel
+    PANELS: Panels
+    PANEL_TYPE: Panel type
+    PARALLAX: Parallax
+    PATTERN_FOOTER: Pattern footer
+    PHONE: Phone
+    PRIMARY: Primary
+    PRODUCTION: Production mode
+    PRODUCTION_HELP: When enabled, template will render with minified CSS
+    QUOTES: Quotes
+    RADIUS: Radius
+    ROUNDED: Скругления
+    SLIDENAV: Slidenav
+    SLIDENAV_GUTTER: Gutter
+    SLIDENAV_TYPE: Slidenav type
+    SLIDER: Slider
+    SLIDES: Sludes
+    SLIDESHOW: Slideshow
+    SOCIAL_LINKS: Social links
+    SUBTEXT: Subtext
+    TEXT: Text
+    TITLE: Title
+    TYPE: Type
+    URL: Link
+    WIDTH: Width
+  SCRIPT:
+    ACTIVECLS: Active class
+    ANIMATION: Animation
+    AUTOPLAY: Autoplay
+    AUTOPLAYINTERVAL: Autoplay interval
+    CENTER: Center
+    DURATION: Duration
+    INFINITE: Infinite
+    KENBURNS: KenBurns effect
+    PAUSEONHOVER: Pause on hover
+    SCRIPT: Script
+    VIDEOAUTOPLAY: Vadeo autolpay
+    VIDEOMUTE: Video mute
+  MAP:
+    API: API key
+    ICON: Icon
+    INFO: Info
+    LATITUDE: Latitude
+    LONGITUDE: Longitude
+    STYLE: Style
+    SVG: SVG
+    ZOOM: Zoom
+  ERROR: Error
+
+ru:
+  ADMIN:
+    ALIGN: Выравнивание
+    ARROWS: Стрелки
+    ARROWS_CONTRAST: Белые стрелки
+    BADGE: Значок
+    BADGE_CLASS: Класс значка
+    BADGE_TYPE: Тип значка
+    BG_IMAGE: Фоновое изображение
+    BLOCK: Блок
+    BLOCKS: Блоки
+    BLOCK_TYPE: Тип блока
+    BUTTONS: Кнопки
+    BUTTON_TEXT: Текст кнопки
+    BUTTON_URL: URL кнопки
+    CLASS: Класс
+    COLUMN: Колонка
+    COLUMNS: Колонки
+    COL_COUNT: Количество колонок [1-6]
+    COMPONENTS: Компоненты
+    COMPONENTS_DESCRIPTION: "В режиме **collections** подключаются файлы из коллекций `components-css` и `components-js`. Режим **full** подключает все скрипты из `theme://css/components` и `theme://js/components`" 
+    CONTRAST_FOOTER: Цвет текста «подвала»
+    COPY: '| <a href="http://rustark.com" title="Разработка сайта">DY</a>'
+    DEFAULT_LANG: Язык по умолчанию
+    DESCRIPTION: Описание
+    DIVIDER: Разделитель
+    FOOTER: Футер
+    GALLERY: Галерея
+    GOOGLE_MAP: Google карта
+    GRID: Сетка
+    HEADER: Заголовок
+    HEIGHT: Высота
+    ICON: Иконка
+    ICONS: Иконки
+    ICON_TYPE: Тип иконки
+    IFRAME: Iframe видео
+    IMG: Изображение
+    IMG_HEIGHT: Высота изображения
+    IMG_HEIGHT_PANEL: Высота изображения панели
+    IMG_WIDTH: Ширина изображения
+    IMG_WIDTH_PANEL: Ширина изображения панели
+    ITEM: Элемент
+    ITEMS: Элементы
+    LIGHTBOX: Лайтбокс
+    LINK: Ссылка
+    LIST: Список
+    LOGO: Логотип
+    LOGO_CENTER: Логотип по центру
+    LOGO_FOOTER: Логотип в футере
+    LOGO_MOBILE: Логотип на мобильных
+    MENU: Меню
+    MENU_BIG: Большое меню
+    MENU_DOTS: Меню переключателей
+    MENU_STICKY: Закрепить меню
+    META: Мета
+    NAV: Навигация
+    OTHER: Прочее
+    PANEL: Панель
+    PANELS: Панели
+    PANEL_TYPE: Тип панели
+    PARALLAX: Параллакс
+    PATTERN_FOOTER: Фон «подвала»
+    PHONE: Телефон
+    PRIMARY: Выделить
+    PRODUCTION: Рабочий режим
+    PRODUCTION_HELP: Если включено, шаблон будет использовать минифицированные CSS
+    QUOTES: Кавычки
+    RADIUS: Радиус
+    ROUNDED: Скругления
+    SLIDEDOTNAV_TYPE: Тип переключателей
+    SLIDENAV: Навигация
+    SLIDENAV_GUTTER: Расстояние между слайдами
+    SLIDENAV_TYPE: Тип стрелок
+    SLIDER: Слайдер
+    SLIDES: Слайды
+    SLIDESHOW: Слайдшоу
+    SOCIAL_LINKS: Социальные ссылки
+    SUBTEXT: Описание
+    TEXT: Текст
+    TITLE: Заголовок
+    TYPE: Тип
+    URL: Ссылка
+    WIDTH: Ширина
+  SCRIPT:
+    ACTIVECLS: Класс активного слайда
+    ANIMATION: Анимация
+    AUTOPLAY: Автозапуск
+    AUTOPLAYINTERVAL: Интервал
+    CENTER: По центру
+    DURATION: Продолжительность
+    HEADER: Скрипт
+    INFINITE: Бесконечная прокрутка
+    KENBURNS: Эффект приближения
+    PAUSEONHOVER: Пауза при наведении
+    VIDEOAUTOPLAY: Автозапуск видео
+    VIDEOMUTE: Отключить звук
+  MAP:
+    API: API ключ
+    ICON: Иконка
+    INFO: Информация
+    LATITUDE: Широта
+    LONGITUDE: Долгота
+    STYLE: Стили карты
+    SVG: SVG
+    ZOOM: Увеличение
+  ERROR: Ошибка

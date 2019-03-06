@@ -1,0 +1,29 @@
+form:
+  fields:
+
+  .buttons:
+    name: buttons
+    type: list
+    style: vertical
+    label: ADMIN.BUTTONS
+    fields:
+
+      .text:
+        type: text
+        label: Text
+
+      .url:
+        type: text
+        default: '#modal-ordering'
+        label: URL
+
+      .class:
+        type: select
+        label: ADMIN.BLOCK_TYPE
+        default: default
+        options:
+          default: 'default'
+          primary: 'primary'
+          success: 'success'
+          danger: 'danger'
+          link: 'link'

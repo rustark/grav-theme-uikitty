@@ -1,0 +1,113 @@
+{# Macro #}
+{% import 'macros/macros.html.twig' as macros %}
+
+{# Scripts #}
+{% do assets.addJs('theme://js/components/slideshow.min.js', {'priority':79, 'group':'bottom'}) %}
+
+{% if header.script_animation == 'slice-down' or
+      header.script_animation == 'slice-up' or
+      header.script_animation == 'slice-up-down' or
+      header.script_animation == 'fold' or
+      header.script_animation == 'puzzle' or
+      header.script_animation == 'boxes' or
+      header.script_animation == 'boxes-reverse' or
+      header.script_animation == 'random-fx'
+%}
+	{% do assets.addJs('theme://js/components/slideshow-fx.min.js', {'priority':78, 'group':'bottom'}) %}
+{% endif %}
+
+{# Set script settings #}
+{% set script_autoplay = page.header.script_autoplay ? 'true' : 'false' %}
+{% set script_kenburns = page.header.script_kenburns ? 'true' : 'false' %}
+{% set script_pauseonhover = page.header.script_pauseonhover ? 'true' : 'false' %}
+{% set script_videoautoplay = page.header.script_videoautoplay ? 'true' : 'false' %}
+{% set script_videomute = page.header.script_videomute ? 'true' : 'false' %}
+
+{% set script_animation = page.header.script_animation %}
+{% set script_autoplayinterval = page.header.script_autoplayinterval %}
+{% set script_duration = page.header.script_duration %}
+
+{# Set nav contrast #}
+{% set slidenav = page.header.slidenav == 'white' ? ' uk-slidenav-contrast' %}
+{% set slidedotnav = page.header.slidedotnav == 'white' ? ' uk-dotnav-contrast' %}
+
+{# Set image size #}
+{% set img_width  = page.header.img_width %}
+{% set img_height = page.header.img_height %}
+
+<header id="tm{{ page.slug }}" class="uk-slidenav-position{{ ' ' ~ page.header.body_classes }}" data-uk-slideshow="{
+		animation: '{{ script_animation }}',
+		duration: {{ script_duration }},
+		autoplay: {{ script_autoplay }},
+		pauseOnHover: {{ script_pauseonhover }},
+		autoplayInterval: {{ script_autoplayinterval }},
+		videoautoplay: {{ script_videoautoplay }},
+		videomute: {{ script_videomute }},
+		kenburns: {{ script_kenburns }},
+	}">
+
+	{% if page.header.slideshow %}
+
+	    <ul class="uk-slideshow uk-overlay-active">
+	    	{% for item in page.header.slideshow %}
+	    		<li>
+	    			{# Set panel type #}
+	    			{% if item.panel == 'overlay' %}
+	    				{% set panel_type = ' uk-overlay-background uk-overlay-fade uk-flex uk-flex-center uk-flex-middle' %}
+	    			{% elseif item.panel == 'top' %}
+	    				{% set panel_type = ' uk-overlay-background uk-overlay-top uk-overlay-slide-top' %}
+	    			{% elseif item.panel == 'right' %}
+	    				{% set panel_type = ' uk-overlay-background uk-overlay-right uk-overlay-slide-right uk-width-1-3' %}
+	    			{% elseif item.panel == 'bottom' %}
+	    				{% set panel_type = ' uk-overlay-background uk-overlay-bottom uk-overlay-slide-bottom' %}
+	    			{% elseif item.panel == 'left' %}
+	    				{% set panel_type = ' uk-overlay-background uk-overlay-left uk-overlay-slide-left uk-width-1-3' %}
+	    			{% else %}
+	    				{% set panel_type = ' uk-flex uk-flex-center uk-flex-middle uk-text-center tm-text-default' %}
+	    			{% endif %}
+
+		    		{# Image #}
+		    		{% if item.iframe %}
+		    			{{ item.iframe }}
+		    		{% else %}
+						{% if img_width and img_height %}
+							{{ page.media[item.img].cropZoom(img_width, img_height).html }}
+						{% else %}
+							{{ page.media[item.img].html }}
+						{% endif %}
+					{% endif %}
+
+					{% if item.header != '' or item.text != '' %}
+					<div class="uk-overlay-panel{{ panel_type }}">
+						<div>
+							<h3 class="uk-hidden-large">{{ item.header }}</h3>
+							<h3 class="uk-heading-large uk-visible-large">{{ item.header }}</h3>
+							<p>{{ item.text }}</p>
+							{% for btn in item.buttons %}
+								{% set primary = btn.primary ? ' uk-button-primary' %}
+								{{ macros.uk_button(btn.url, btn.text, 'uk-hidden-large uk-margin-top' ~ primary) }}
+								{{ macros.uk_button(btn.url, btn.text, 'uk-visible-large uk-button-large uk-margin-top' ~ primary) }}
+							{% endfor %}
+						</div>
+					</div>
+					{% endif %}
+	    		</li>
+	    	{% endfor %}
+		</ul>
+
+		{% if page.header.slidenav != 'none' %}
+			<a class="uk-slidenav{{ slidenav }} uk-slidenav-previous" data-uk-slideshow-item="previous"></a>
+	    	<a class="uk-slidenav{{ slidenav }} uk-slidenav-next" data-uk-slideshow-item="next"></a>
+	    {% endif %}
+
+		{% if page.header.slidedotnav != 'none' %}
+		    <ul class="uk-dotnav{{ slidedotnav }} uk-position-bottom uk-flex-center">
+		    	{% for item in page.header.slideshow %}
+		        	<li data-uk-slideshow-item="{{ loop.index0 }}"><a href=""></a></li>
+		        {% endfor %}
+		    </ul>
+	    {% endif %}
+
+	{% endif %}
+
+</header>

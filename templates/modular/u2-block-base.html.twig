@@ -1,0 +1,94 @@
+{% import 'macros/macros.html.twig' as macros %}
+
+{% set rounded = theme_var('rounded') ? ' uk-border-rounded' %}
+{% set grid_size = theme_var('grid') ? ' uk-grid-' ~ theme_var('grid') %}
+{% set margin_top = theme_var('grid') ? ' uk-margin-' ~ theme_var('grid') ~ '-top' %}
+
+{% set contrast = page.header.block == "primary" or page.header.block == "secondary" ? ' uk-contrast' %}
+{% set count = page.header.columns_count %}
+{% set divider = page.header.divider ? ' uk-grid-divider' %}
+{% set col_classes = page.header.col_classes ? ' ' ~ page.header.col_classes %}
+
+{# Set block background color #}
+{% if page.header.block == 'muted' %}
+    {% set uk_block = ' uk-block uk-block-muted' %}
+{% elseif page.header.block == 'primary' %}
+    {% set uk_block = ' uk-block uk-block-primary uk-contrast' %}
+{% elseif page.header.block == 'secondary' %}
+    {% set uk_block = ' uk-block uk-block-secondary uk-contrast' %}
+{% else %}
+    {% set uk_block = ' uk-block' %}
+{% endif %}
+
+{# Set image size #}
+{% set img_width  = page.header.img_width %}
+{% set img_height = page.header.img_height %}
+
+<section
+    id="tm{{ page.slug }}"
+    class="tm-section uk-cover-background{{ uk_block }}"
+    {{ page.header.bg_image ? 'style="background-image: url(' ~ page.media[page.header.bg_image].url ~ ')"' }}
+    {{ page.header.parallax != 0 ? 'data-uk-parallax="{bg:' ~ page.header.parallax ~ '}"'}}
+    >
+
+    <article class="uk-article uk-container uk-container-center {{ page.header.body_classes }}">
+
+        {{ page.header.header ? '<h3 class="uk-article-title">' ~ page.header.header ~ '</h3>' }}
+        {{ page.header.description ? '<p class="uk-article-lead' ~ contrast ~ '">' ~ page.header.description ~ '</p>' }}
+        {{ page.content ? page.content }}
+
+            {% if page.header.columns %}
+            {% for grid in page.header.columns|batch(count, null) %}
+
+                <div class="uk-grid{{ divider ~ margin_top ~ grid_size ~ col_classes }}" data-uk-grid-margin="">
+
+                    {% for col in grid %}
+
+                    <div class="uk-width-medium-1-{{ count }}">
+                        <div class="uk-panel">                            
+
+                            <article class="uk-article {{ col.other.classes }}">                                
+                                {# Image #}
+                                {% if col.img %}                                
+                                    {% if img_width and img_height %}
+                                        {{ page.media[col.img].cropZoom(img_width, img_height).html(null, page.title, rounded) }}
+                                    {% else %}
+                                        {{ page.media[col.img].html(null, page.title, rounded) }}
+                                    {% endif %}
+                                {% endif %}
+
+                                {{ col.header ? '<h1 class="uk-article-title">' ~ col.header ~ '</h1>' }}
+                                {{ col.meta ? '<p class="uk-article-meta">' ~ col.meta ~ '</p>' }}
+                                {{ col.description ? '<p class="uk-article-lead">' ~ col.description ~ '</p>' }}
+                                {{ col.text ? col.text|markdown }}
+                                
+                                {% if col.other.icons %}
+                                <ul class="uk-list uk-list-space">
+                                    {% for icon in col.other.icons %}
+                                        <li><i class="uk-icon-justify uk-icon-{{ icon.icon }}"></i> {{ icon.text }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+
+                                {% for btn in col.other.buttons %}
+                                    {% set class = btn.class ? ' uk-button-' ~ btn.class %}
+                                    {{ macros.uk_button(btn.url, btn.text, 'uk-button-large uk-margin-small-top' ~ class) }}
+                                {% endfor %}
+                            </article>
+ 
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endfor %}
+            {% endif %}
+
+    </article>
+</section>
+
+{% if page.header.parallax != 0 %}
+    {% do assets.addJs('theme://js/components/parallax.min.js', {'priority':102, 'group':'bottom'}) %}
+{% endif %}

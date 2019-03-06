@@ -1,0 +1,37 @@
+{% set footer_type = theme_var('footer_type') %}
+{% set social_type = theme_var('social_type_footer') %}
+{% set grid_size = grid ? ' uk-grid-' ~ grid %}
+{% set margin = ' uk-margin-' ~ grid ~ '-top uk-margin-' ~ grid ~ '-bottom' %}
+
+{# Set block background color #}
+{% if footer_type == 'muted' %}
+    {% set uk_block = ' uk-block uk-block-muted' %}
+{% elseif footer_type == 'primary' %}
+    {% set uk_block = ' uk-block uk-block-primary uk-contrast' %}
+{% elseif footer_type == 'secondary' %}
+    {% set uk_block = ' uk-block uk-block-secondary uk-contrast' %}
+{% else %}
+    {% set uk_block = ' uk-block' %}
+{% endif %}
+
+{% if footer_type != 'none' %}
+<footer class="uk-padding-vertical-remove{{ uk_block }}">
+    <section class="uk-container uk-container-center uk-text-center{{ margin }}">
+        <div class="uk-grid{{ grid_size }}">
+            
+            {% if social_type != 'none' %}
+                <div class="uk-width-medium-1-1 uk-text-center uk-margin-bottom">
+                    {% for i in icons %}
+                        <a href="{{ i.url }}" class="{{ social_type }} uk-margin-small-left uk-icon-{{ i.icon }}"></a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="uk-width-medium-1-1 uk-text-center">
+                <i class="uk-icon-copyright"></i> {{ now|date("Y") }} {{ site.title|e('html') }} {{ 'ADMIN.COPY'|t }}
+            </div>
+            
+        </div>
+    </section>
+</footer>
+{% endif %}

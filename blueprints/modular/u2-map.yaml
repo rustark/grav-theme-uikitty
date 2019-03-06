@@ -1,0 +1,66 @@
+title: Block
+'@extends': default
+
+form:
+  fields:
+    tabs:
+      fields:
+
+        map:
+          type: tab
+          title: ADMIN.GOOGLE_MAP
+          fields:
+
+            header.width:
+              type: text
+              label: ADMIN.WIDTH
+              default: 100%
+            header.height:
+              type: text
+              label: ADMIN.HEIGHT
+              default: 300px
+            header.latitude:
+              type: text
+              label: MAP.LATITUDE
+              default: 40.7143528
+            header.longitude:
+              type: text
+              label: MAP.LONGITUDE
+              default: -74.0059731
+            header.icon:
+              type: text
+              label: MAP.ICON
+            header.zoom:
+              type: text
+              label: MAP.ZOOM
+              default: 18
+            header.info:
+              type: textarea
+              label: MAP.INFO
+            header.style:
+              type: textarea
+              label: MAP.STYLE
+            header.api:
+              type: text
+              label: MAP.API
+              default: AIzaSyASQcUyEC7hwwYk4C_h6WgNCP6vmPXNu2E
+              validate:
+                required: true
+            header.svg_info:
+              type: fieldset
+              title: MAP.SVG
+              icon: map-marker
+              collapsed: true     # Initial state of fieldset (see collapsible option)
+              collapsible: true    # Whether one can expand the fieldset or not
+              fields:
+                header.svg:
+                  type: text
+                  label: MAP.ICON
+                header.svg_width:
+                  type: text
+                  default: 64
+                  label: ADMIN.WIDTH
+                header.svg_height:
+                  type: text
+                  default: 64
+                  label: ADMIN.HEIGHT

@@ -1,0 +1,99 @@
+{% do assets.addJs('theme://js/components/slider.js', {'priority':80, 'group':'bottom'}) %}
+
+{% set contrast = page.header.block == "primary" or page.header.block == "secondary" ? ' uk-contrast' %}
+{% set count = page.header.columns_count %}
+{% set grid_size = theme_var('grid') ? ' uk-grid-' ~ theme_var('grid') %}
+{% set margin_top = theme_var('grid') ? ' uk-margin-' ~ theme_var('grid') ~ '-top' %}
+{% set rounded = theme_var('rounded') ? ' uk-border-rounded' %}
+{% set slidenav = page.header.slidenav == 'white' ? ' uk-slidenav-contrast' %}
+
+{# Set script settings #}
+{% set script_autoplay = page.header.script_autoplay ? 'true' : 'false' %}
+{% set script_center = page.header.script_center ? 'true' : 'false' %}
+{% set script_infinite = page.header.script_infinite ? 'true' : 'false' %}
+{% set script_pauseonhover = page.header.script_pauseonhover ? 'true' : 'false' %}
+
+{% set script_activecls = page.header.script_activecls %}
+{% set script_autoplayinterval = page.header.script_autoplayinterval %}
+
+{# Set block type #}
+{% if page.header.block == 'muted' %}
+    {% set uk_block = ' uk-block uk-block-muted ' %}
+{% elseif page.header.block == 'primary' %}
+    {% set uk_block = ' uk-block uk-block-primary uk-contrast ' %}
+{% elseif page.header.block == 'secondary' %}
+    {% set uk_block = ' uk-block uk-block-secondary uk-contrast ' %}
+{% else %}
+    {% set uk_block = ' uk-block ' %}
+{% endif %}
+
+{# Set image size #}
+{% set img_width  = page.header.img_width %}
+{% set img_height = page.header.img_height %}
+
+<section
+    id="tm{{ page.slug }}"
+    class="tm-section uk-cover-background{{ uk_block }}"
+    {{ page.header.bg_image ? 'style="background-image: url(' ~ page.media[page.header.bg_image].url ~ ')"' }}
+    {{ page.header.parallax != 0 ? 'data-uk-parallax="{bg:' ~ page.header.parallax ~ '}"'}}
+    >
+
+    <article class="uk-article uk-container uk-container-center {{ page.header.body_classes }}">
+
+        {{ page.header.header ? '<h3 class="uk-article-title">' ~ page.header.header ~ '</h3>' }}
+        {{ page.header.description ? '<p class="uk-article-lead' ~ contrast ~ '">' ~ page.header.description ~ '</p>' }}
+        {{ page.content ? page.content }}
+
+            {% if page.header.slides %}
+            	<div class="uk-slidenav-position" data-uk-slider="{
+	            	center: {{ script_center }},
+	            	infinite: {{ script_infinite }},
+	            	autoplay: {{ script_autoplay }},
+	            	activecls: '{{ script_activecls }}',
+	            	pauseOnHover: {{ script_pauseonhover }},
+	            	autoplayInterval: {{ script_autoplayinterval }}
+            	}">
+
+				    <div class="uk-slider-container">
+				        <ul class="uk-slider uk-grid uk-grid-width-medium-1-{{ count ~ margin_top ~ grid_size }}">
+				            {% for item in page.header.slides %}
+								<li>
+								<div class="uk-panel uk-text-left">
+									{# Panel image #}
+                                	{% if item.img %}                                
+                                	    {% if img_width and img_height %}
+                                	        {{ page.media[item.img].cropZoom(img_width, img_height).html(null, page.title, 'uk-panel-teaser' ~ rounded) }}
+                                	    {% else %}
+                                	        {{ page.media[item.img].html(null, page.title, 'uk-panel-teaser' ~ rounded) }}
+                                	    {% endif %}
+                                	{% endif %}
+
+									{# Panel header #}
+									{{ item.header ? '<h3 class="uk-panel-title">' ~ item.header ~ '</h3>' }}
+
+									{# Panel text #}
+									{% if item.text %}
+										<p class="uk-text-left">{% if item.quotes %}<i class="uk-icon-quote-left uk-icon-small uk-align-left"></i>{% endif %}{{ item.text }}</p>
+									{% endif %}
+
+									{# Panel small text#}
+									{{ item.subtext ? '<dfn class="uk-text-small uk-text-muted uk-align-right">' ~ item.subtext ~ '</dfn>' }}
+								</div>
+								</li>
+				            {% endfor %}
+            			</ul>
+				    </div>
+
+				{% if page.header.slidenav != 'none' %}
+					<a class="uk-slidenav{{ slidenav }} uk-slidenav-previous" data-uk-slider-item="previous" draggable="false"></a>
+                	<a class="uk-slidenav{{ slidenav }} uk-slidenav-next" data-uk-slider-item="next" draggable="false"></a>
+                {% endif %}
+				</div>
+            {% endif %}
+
+    </article>
+</section>
+
+{% if page.header.parallax != 0 %}
+    {% do assets.addJs('theme://js/components/parallax.min.js', {'priority':102, 'group':'bottom'}) %}
+{% endif %}

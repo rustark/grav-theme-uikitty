@@ -1,0 +1,130 @@
+title: Slider
+'@extends': default
+
+form:
+  fields:
+    tabs:
+      fields:
+
+        slider:
+          type: tab
+          title: ADMIN.SLIDER
+          fields:
+
+            slider:
+              type: section
+              title: ADMIN.SLIDER
+              underline: true
+
+            header.slides:
+              name: features
+              type: list
+              style: vertical
+              fields:
+
+                .img:
+                  type: filepicker
+                  folder: '@self'
+                  label: ADMIN.IMG
+                  preview_images: true
+                  accept:
+                    - .png
+                    - .jpg
+                    - .gif
+                    - .svg
+
+                .header:
+                  type: text
+                  label: ADMIN.HEADER
+
+                .quotes:
+                  type: toggle
+                  label: ADMIN.QUOTES
+                  highlight: 0
+                  default: 0
+                  options:
+                    1: PLUGIN_ADMIN.ENABLED
+                    0: PLUGIN_ADMIN.DISABLED
+                  validate:
+                    type: bool
+
+                .text:
+                  type: textarea
+                  label: ADMIN.TEXT
+                  
+                .subtext:
+                  type: text
+                  label: ADMIN.SUBTEXT
+                  
+          import-items@:
+            type: /partials/items
+            context: blueprints://pages
+          
+          import-block@:
+            type: /partials/block
+            context: blueprints://pages
+          
+          import-header@:
+            type: /partials/header
+            context: blueprints://pages
+
+        script:
+          type: tab
+          title: SCRIPT.HEADER
+          fields:
+
+            header.script_center:
+              type: toggle
+              label: SCRIPT.CENTER
+              highlight: 0
+              default: 0
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+
+            header.script_infinite:
+              type: toggle
+              label: SCRIPT.INFINITE
+              highlight: 1
+              default: 1
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+
+            header.script_activecls:
+              type: text
+              label: SCRIPT.ACTIVECLS
+              default: uk-active
+
+            header.script_autoplay:
+              type: toggle
+              label: SCRIPT.AUTOPLAY
+              highlight: 0
+              default: 0
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+
+            header.script_pauseonhover:
+              type: toggle
+              label: SCRIPT.PAUSEONHOVER
+              highlight: 0
+              default: 0
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+
+            header.script_autoplayinterval:
+              type: text
+              label: SCRIPT.AUTOPLAYINTERVAL
+              default: 7000
+              validate:
+                pattern: '^[0-9]+$'

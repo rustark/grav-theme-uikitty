@@ -1,0 +1,36 @@
+form:
+  fields:
+
+    block:
+      type: section
+      title: ADMIN.BLOCK
+      underline: true
+
+    header.block:
+      type: select
+      label: ADMIN.BLOCK_TYPE
+      default: default
+      options:
+        default:   'default'
+        muted:     'muted'
+        primary:   'primary'
+        secondary: 'secondary'
+
+    header.bg_image:
+      type: filepicker
+      folder: '@self'
+      label: ADMIN.BG_IMAGE
+      preview_images: true
+      accept:
+        - .png
+        - .jpg
+        - .gif
+
+    header.parallax:
+      type: range
+      label: ADMIN.PARALLAX
+      size: long
+      default: 0
+      validate:
+        min: -300
+        max: 100

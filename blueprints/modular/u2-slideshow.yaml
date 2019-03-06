@@ -1,0 +1,190 @@
+title: Slider
+'@extends': default
+
+form:
+  fields:
+    tabs:
+      fields:
+
+        slideshow:
+          type: tab
+          title: ADMIN.SLIDESHOW
+          fields:
+
+            header.slidenav:
+              type: select
+              label: ADMIN.SLIDENAV_TYPE
+              default: default
+
+              options:
+                none: 'none'
+                black: 'black'
+                white: 'white'
+
+            header.slidedotnav:
+              type: select
+              label: ADMIN.SLIDEDOTNAV_TYPE
+              default: default
+
+              options:
+                none: 'none'
+                black: 'black'
+                white: 'white'
+
+            header.img_width:
+              type: text
+              toggleable: true
+              label: ADMIN.IMG_WIDTH
+              size: small
+              placeholder: px
+              validate:
+                type: int
+                min: 0
+                max: 5000
+
+            header.img_height:
+              type: text
+              toggleable: true
+              label: ADMIN.IMG_HEIGHT
+              size: small
+              placeholder: px
+              validate:
+                type: int
+                min: 0
+                max: 5000
+
+            header.slideshow:
+              name: features
+              type: list
+              style: vertical
+              label: ADMIN.SLIDES
+              fields:
+
+                .panel:
+                  type: select
+                  label: ADMIN.PANEL
+                  default: default
+                  options:
+                    default: 'default'
+                    overlay: 'overlay'
+                    top: 'top'
+                    right: 'right'
+                    bottom: 'bottom'
+                    left: 'left'
+
+                .img:
+                  type: filepicker
+                  folder: '@self'
+                  label: ADMIN.IMG
+                  preview_images: true
+                  accept:
+                    - .png
+                    - .jpg
+                    - .gif
+
+                .header:
+                  type: text
+                  label: ADMIN.HEADER
+
+                .text:
+                  type: textarea
+                  label: ADMIN.TEXT
+                  
+                .buttons:
+                  name: buttons
+                  type: list
+                  label: ADMIN.BUTTONS
+                  fields:
+
+                    .text:
+                      type: text
+                      label: ADMIN.BUTTON_TEXT
+
+                    .url:
+                      type: text
+                      default: '#modal-ordering'
+                      label: ADMIN.BUTTON_URL
+
+                    .primary:
+                      type: toggle
+                      label: ADMIN.PRIMARY
+                      highlight: 1
+                      default: 0
+                      options:
+                          1: PLUGIN_ADMIN.ENABLED
+                          0: PLUGIN_ADMIN.DISABLED
+                      validate:
+                          type: bool
+
+                .iframe:
+                  type: textarea
+                  label: ADMIN.IFRAME
+        script:
+          type: tab
+          title: SCRIPT.HEADER
+          fields:
+
+            header.script_animation:
+              type: select
+              label: SCRIPT.ANIMATION
+              default: default
+              options:
+                fade: 'fade'
+                scroll: 'scroll'
+                scale: 'scale'
+                swipe: 'swipe'
+                slice-down : 'slice-down'
+                slice-up : 'slice-up'
+                slice-up-down : 'slice-up-down'
+                fold : 'fold'
+                puzzle : 'puzzle'
+                boxes : 'boxes'
+                boxes-reverse : 'boxes-reverse'
+                random-fx : 'random-fx'
+
+            header.script_duration:
+              type: text
+              label: SCRIPT.DURATION
+              default: 500
+              validate:
+                pattern: '^[0-9]+$'
+
+            header.script_kenburns:
+              type: toggle
+              label: SCRIPT.KENBURNS
+              highlight: 0
+              default: 0
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+
+            header.script_autoplay:
+              type: toggle
+              label: SCRIPT.AUTOPLAY
+              highlight: 0
+              default: 0
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+
+            header.script_pauseonhover:
+              type: toggle
+              label: SCRIPT.PAUSEONHOVER
+              highlight: 0
+              default: 0
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+
+            header.script_autoplayinterval:
+              type: text
+              label: SCRIPT.AUTOPLAYINTERVAL
+              default: 7000
+              validate:
+                pattern: '^[0-9]+$'

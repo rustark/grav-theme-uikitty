@@ -1,0 +1,96 @@
+{% set rounded = theme_var('rounded') ? ' uk-border-rounded' %}
+{% set grid_size = theme_var('grid') ? ' uk-grid-' ~ theme_var('grid') %}
+{% set margin_top = theme_var('grid') ? ' uk-margin-' ~ theme_var('grid') ~ '-top' %}
+
+{% set contrast = page.header.block == "primary" or page.header.block == "secondary" ? ' uk-contrast' %}
+{% set count = page.header.columns_count %}
+{% set divider = page.header.divider ? ' uk-grid-divider' %}
+
+{# Set block background color #}
+{% if page.header.block == 'muted' %}
+    {% set uk_block = ' uk-block uk-block-muted' %}
+{% elseif page.header.block == 'primary' %}
+    {% set uk_block = ' uk-block uk-block-primary uk-contrast' %}
+{% elseif page.header.block == 'secondary' %}
+    {% set uk_block = ' uk-block uk-block-secondary uk-contrast' %}
+{% else %}
+    {% set uk_block = ' uk-block' %}
+{% endif %}
+
+<section
+    id="tm{{ page.slug }}"
+    class="tm-section uk-cover-background{{ uk_block }}"
+    {{ page.header.bg_image ? 'style="background-image: url(' ~ page.media[page.header.bg_image].url ~ ')"' }}
+    {{ page.header.parallax != 0 ? 'data-uk-parallax="{bg:' ~ page.header.parallax ~ '}"'}}
+    >
+
+    <article class="uk-article uk-container uk-container-center {{ page.header.body_classes }}">
+
+        {{ page.header.header ? '<h3 class="uk-article-title">' ~ page.header.header ~ '</h3>' }}
+        {{ page.header.description ? '<p class="uk-article-lead' ~ contrast ~ '">' ~ page.header.description ~ '</p>' }}
+        {{ page.content ? page.content }}
+
+            {% if page.header.columns %}
+            {% for grid in page.header.columns|batch(count, null) %}
+
+                <div class="uk-grid{{ divider ~ grid_size ~ margin_top }}" data-uk-grid-match="{target:'.uk-panel'}">
+
+                    {% for col in grid %}
+
+                    {# Set icon type #}
+                    {% if col.icon_type == 'muted' %}
+                        {% set icon_type = ' uk-text-muted' %}
+                    {% elseif col.icon_type == 'primary' %}
+                        {% set icon_type = ' uk-text-primary' %}
+                    {% elseif col.icon_type == 'success' %}
+                        {% set icon_type = ' uk-text-success' %}
+                    {% elseif col.icon_type == 'warning' %}
+                        {% set icon_type = ' uk-text-warning' %}
+                    {% elseif col.icon_type == 'danger' %}
+                        {% set icon_type = ' uk-text-danger' %}
+                    {% elseif col.icon_type == 'contrast' %}
+                        {% set icon_type = ' uk-text-contrast' %}
+                    {% else %}
+                        {% set icon_type = '' %}
+                    {% endif %}
+
+                    <div class="uk-width-medium-1-{{ count }}">
+                        <div class="uk-panel uk-margin-large-bottom">
+
+                            {% if page.header.icons_align == 'left' %}
+
+                                <div class="uk-grid">
+                                {% set tcol = col.icon ? 'uk-width-medium-5-6' : 'uk-width-1-1' %}
+                                    {{ col.icon ? '<div class="uk-width-medium-1-6"><i class="uk-icon-large uk-icon-' ~ col.icon ~ icon_type ~ '"></i></div>' }}
+                                    <div class="{{ tcol }}">
+                                        {{ col.header ? '<h3 class="uk-margin-bottom">' ~ col.header ~ '</h3>' }}
+                                        {{ col.text ? col.text }}
+                                    </div>
+                                </div>        
+
+                            {% else %}
+
+                                <div class="uk-text-center">                                    
+                                    {{ col.icon ? '<div class="uk-margin-large-bottom"><i class="uk-icon-large uk-icon-' ~ col.icon ~ icon_type ~ '"></i></div>' }}
+                                    {{ col.header ? '<h3 class="uk-margin-bottom">' ~ col.header ~ '</h3>' }}
+                                    {{ col.text ? col.text }}
+                                </div>
+
+                            {% endif %}   
+
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endfor %}
+            {% endif %}
+
+    </article>
+</section>
+
+{% if page.header.parallax != 0 %}
+    {% do assets.addJs('theme://js/components/parallax.min.js', {'priority':102, 'group':'bottom'}) %}
+{% endif %}

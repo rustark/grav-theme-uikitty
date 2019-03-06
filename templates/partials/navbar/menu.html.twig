@@ -1,0 +1,107 @@
+{% set menu_big = theme_var('menu_big') ? true %}
+
+{{ menu_big ? '<a href="#" class="uk-navbar-toggle uk-padding-remove uk-hidden-large" data-uk-offcanvas="{target:\'#offcanvas\'}"></a>'  }}
+
+<nav class="uk-navbar-nav uk-navbar-{{ align }} uk-visible-large" data-uk-scrollspy-nav="{closest:'li', smoothscroll:true}">
+{% if menu_big %}
+    {# Mega menu #}
+	{% for p in pages.children.visible %}
+    {% set current_page = (p.active or p.activeChild) ? 'uk-active' %}
+        {% if p.children.visible.count > 0 %}
+            <li class="uk-parent {{ current_page }}" data-uk-dropdown="{justify:'#tm-navbar-container'}">
+                <a {{ p.header.menu_sub ? 'class="uk-navbar-nav-subtitle"' }}>
+                    {{ p.header.menu_icon ? '<i class="uk-icon-' ~ p.header.menu_icon ~ '"></i>' }}
+                    {{ p.menu }} <i class="uk-icon-caret-down uk-text-small"></i>
+                    {{ p.header.menu_sub ? '<div>' ~ p.header.menu_sub ~ '</div>' }}
+                </a>
+                {% if p.children.visible.count > 0 %}
+                    <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-autoflip uk-dropdown-bottom uk-dropdown-width-{{ p.children.visible.count|round }} uk-box-shadow-large">
+                        <div class="uk-grid uk-dropdown-grid">
+                            {% for dropdownHeader in p.children.visible %}
+                                <div class="uk-width-1-{{ p.children.visible.count|round }} uk-flex uk-flex-column uk-flex-space-between">
+                                    <ul class="uk-nav uk-nav-dropdown uk-panel">
+                                        {% if dropdownHeader.children.visible.count > 0 %}
+                                            <li class="uk-nav-header">{{ dropdownHeader.menu }}</li>
+                                            {% for dropdownItem in dropdownHeader.children.visible %}
+                                                <li>												
+                                                    <a href="{{ dropdownItem.url }}">
+                                                        {{ dropdownItem.header.menu_icon ? '<i class="uk-icon-' ~ dropdownItem.header.menu_icon ~ '"></i>' }}
+                                                        {{ dropdownItem.menu }}
+                                                        {{ dropdownItem.header.menu_sub ? '<div>' ~ dropdownItem.header.menu_sub ~ '</div>' }}
+                                                    </a>												
+                                                </li>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </ul>
+                                    {{ dropdownHeader.content ? '<div class="uk-panel uk-text-small uk-margin-large-top">' ~ dropdownHeader.content ~	'</div>' }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            </li>
+        {% else %}
+            <li class="{{ current_page }}">
+                <a href="{{ p.url }}">{{ p.menu }}</a>
+            </li>
+        {% endif %}
+    {% endfor %}    
+{% else %}
+    {# Landing menu #}
+	{% for p in page.collection %}
+        {% if p.header.menu %}
+        <li>
+            <a href="#tm{{ p.slug }}"{{ p.header.menu_sub ? ' class="uk-navbar-nav-subtitle"' }}>
+            {{ p.header.menu_icon ? '<i class="uk-icon-' ~ p.header.menu_icon ~ '"></i>' }}
+            {{ p.header.menu }}
+            {{ p.header.menu_sub ? '<div>' ~ p.header.menu_sub ~ '</div>' }}
+            </a>
+        </li>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+</nav>
+
+{# Offcanves #}
+<div id="offcanvas" class="uk-offcanvas" aria-hidden="true">
+<div class="uk-offcanvas-bar" mode="push">
+    <ul class="uk-nav uk-nav-offcanvas">
+    {% if menu_big %}
+        {# Mega menu #}
+        {% for p in pages.children.visible %}
+            {% set current_page = (p.active or p.activeChild) ? 'uk-active' : '' %}
+            {% if p.children.visible.count > 0 %}
+                {% for dropdownHeader in p.children.visible %}
+                        {% if dropdownHeader.children.visible.count > 0 %}
+                            <li class="uk-nav-header">{{ dropdownHeader.menu }}</li>
+                            {% for dropdownItem in dropdownHeader.children.visible %}
+                                <li><a href="{{ dropdownItem.url }}">{{ dropdownItem.menu }}</a></li>
+                            {% endfor %}
+                        {% endif %}
+                    {% if loop.last %}
+                        <li class="uk-nav-divider"></li>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <li class="{{ current_page }}">
+                    <a href="{{ p.url }}">{{ p.menu }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}    
+    {% else %}
+        {# Landing menu #}
+        {% for p in page.collection %}
+            {% if p.header.menu %}
+            <li>
+                <a href="#tm{{ p.slug }}"{{ p.header.menu_sub ? ' class="uk-navbar-nav-subtitle"' }}>
+                {{ p.header.menu_icon ? '<i class="uk-icon-' ~ p.header.menu_icon ~ '"></i>' }}
+                {{ p.header.menu }}
+                {{ p.header.menu_sub ? '<div>' ~ p.header.menu_sub ~ '</div>' }}
+                </a>
+            </li>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    </ul>
+</div>
+</div>

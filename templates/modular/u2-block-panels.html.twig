@@ -1,0 +1,118 @@
+{% import 'macros/macros.html.twig' as macros %}
+
+{% set rounded = theme_var('rounded') ? ' uk-border-rounded' %}
+{% set grid_size = theme_var('grid') ? ' uk-grid-' ~ theme_var('grid') %}
+{% set margin_top = theme_var('grid') ? ' uk-margin-' ~ theme_var('grid') ~ '-top' %}
+
+{% set contrast = page.header.block == "primary" or page.header.block == "secondary" ? ' uk-contrast' %}
+{% set count = page.header.columns_count %}
+{% set divider = page.header.divider ? ' uk-grid-divider' %}
+
+{# Set block background color #}
+{% if page.header.block == 'muted' %}
+    {% set uk_block = ' uk-block uk-block-muted' %}
+{% elseif page.header.block == 'primary' %}
+    {% set uk_block = ' uk-block uk-block-primary uk-contrast' %}
+{% elseif page.header.block == 'secondary' %}
+    {% set uk_block = ' uk-block uk-block-secondary uk-contrast' %}
+{% else %}
+    {% set uk_block = ' uk-block' %}
+{% endif %}
+
+{# Set image size #}
+{% set img_width  = page.header.img_width %}
+{% set img_height = page.header.img_height %}
+
+<section
+    id="tm{{ page.slug }}"
+    class="tm-section uk-cover-background{{ uk_block }}"
+    {{ page.header.bg_image ? 'style="background-image: url(' ~ page.media[page.header.bg_image].url ~ ')"' }}
+    {{ page.header.parallax != 0 ? 'data-uk-parallax="{bg:' ~ page.header.parallax ~ '}"'}}
+    >
+
+    <article class="uk-article uk-container uk-container-center {{ page.header.body_classes }}">
+
+        {{ page.header.header ? '<h3 class="uk-article-title">' ~ page.header.header ~ '</h3>' }}
+        {{ page.header.description ? '<p class="uk-article-lead' ~ contrast ~ '">' ~ page.header.description ~ '</p>' }}
+        {{ page.content ? page.content }}
+
+            {% if page.header.columns %}
+            {% for grid in page.header.columns|batch(count, null) %}
+
+                <div class="uk-grid{{ divider ~ margin_top ~ grid_size }}" data-uk-grid-match="{target:'.uk-panel'}">
+
+                    {% for col in grid %}
+
+                    {# Set panel background color #}
+                    {% if col.type == 'box' %}
+                        {% set type = ' uk-panel-box' %}
+                    {% elseif col.type == 'primary' %}
+                        {% set type = ' uk-panel-box uk-panel-box-primary' %}
+                    {% elseif col.type == 'secondary' %}
+                        {% set type = ' uk-panel-box uk-panel-box-secondary' %}
+                    {% elseif col.type == 'hover' %}
+                        {% set type = ' uk-panel-hover' %}
+                    {% elseif col.type == 'header' %}
+                        {% set type = ' uk-panel-header' %}
+                    {% elseif col.type == 'space' %}
+                        {% set type = ' uk-panel-space' %}
+                    {% else %}
+                        {% set type = '' %}
+                    {% endif %}
+
+                    {# Set badge color #}
+                    {% if col.badge_type == 'success' %}
+                        {% set badge_type = ' uk-badge uk-badge-success' %}
+                    {% elseif col.badge_type == 'warning' %}
+                        {% set badge_type = ' uk-badge uk-badge-warning' %}
+                    {% elseif col.badge_type == 'danger' %}
+                        {% set badge_type = ' uk-badge uk-badge-danger' %}
+                    {% else %}
+                        {% set badge_type = ' uk-badge' %}
+                    {% endif %}
+
+                    <div class="uk-width-medium-1-{{ count }}">
+                    <div class="uk-panel{{ type ~ rounded }}">
+
+                        {# Panel badge #}
+                        {{ col.badge ? '<div class="uk-panel-badge' ~ badge_type ~ rounded ~ '">' ~ col.badge ~ '</div>' }}
+
+                        {# Panel image #}
+                        {% if col.img %}
+                        <div class="{{ rounded ? 'uk-margin-bottom' : 'uk-panel-teaser' }}">
+                            {% if img_width and img_height %}
+                                {{ page.media[col.img].cropZoom(img_width, img_height).html(null, null, rounded) }}
+                            {% else %}
+                                {{ page.media[col.img].html(null, null, rounded) }}
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+                        {# Panel title #}
+                        <h3 class="uk-panel-title">
+                            {% if col.icon %}<i class="uk-icon-{{ col.icon }}"></i>{% endif %} {{ col.header }}
+                        </h3>
+                        {# Panel text #}
+                        {{ col.text ? '<p>' ~ col.text ~ '</p>' }}
+
+                        {# Panel buttons #}
+                        {% for btn in col.buttons %}
+                            {% set class = btn.class ? ' uk-button-' ~ btn.class %}
+                            {{ macros.uk_button(btn.url, btn.text, 'uk-button-large uk-margin-small-top' ~ class) }}
+                        {% endfor %}
+                    </div>
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endfor %}
+            {% endif %}
+
+    </article>
+</section>
+
+{% if page.header.parallax != 0 %}
+    {% do assets.addJs('theme://js/components/parallax.min.js', {'priority':102, 'group':'bottom'}) %}
+{% endif %}

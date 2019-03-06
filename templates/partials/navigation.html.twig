@@ -1,0 +1,38 @@
+{# Theme config #}
+{% set grid_size = theme_var('grid-size') %}
+{% set logo_center = theme_var('logo_center') ? true %}
+{% set menu_big = theme_var('menu_big') ? true %}
+{% set menu_dots = theme_var('menu_dots') ? true %}
+
+{# Navigation #}
+{% if menu_dots %}
+	{% include "partials/navbar/dots.html.twig" %}
+{% endif %}
+
+<div class="uk-navbar" data-uk-sticky>
+	<div id="tm-navbar-container" class="uk-container uk-container-center">
+
+		{% if logo_center %}			
+			{% include "partials/navbar/menu.html.twig" with {align: 'left'} %}
+			{% include "partials/navbar/buttons.html.twig" %}			
+			{% include "partials/navbar/logo.html.twig" with {align: 'center'} %}
+		{% else %}
+			{% include "partials/navbar/logo.html.twig"  with {align: 'left'} %}
+			{% include "partials/navbar/buttons.html.twig" %}
+			{% include "partials/navbar/menu.html.twig" with {align: 'flip'} %}					
+		{% endif %}
+		
+	</div>
+</div>
+
+{# Modal #}
+<div id="modal-ordering" class="uk-modal">
+    <div class="uk-modal-dialog{{ rounded }}">
+        <a class="uk-modal-close uk-close"></a>
+        {% include "forms/form.html.twig" with { form: forms('base-form') } %}
+    </div>
+</div>
+
+{% if theme_config.sticky_menu %}
+	{% do assets.addJs('theme://js/components/sticky.min.js', {'priority':89, 'group':'bottom'}) %}
+{% endif %}

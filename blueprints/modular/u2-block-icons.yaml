@@ -1,0 +1,68 @@
+title: Block
+'@extends': default
+
+form:
+  fields:
+    tabs:
+      fields:
+
+        icons:
+          type: tab
+          title: ADMIN.BLOCK
+          fields:
+
+            icons:
+              type: section
+              title: ADMIN.PANELS
+              underline: true
+
+            header.icons_align:
+              type: select
+              label: ADMIN.ALIGN
+              default: left                  
+              options:
+                left: 'left'
+                center: 'center'
+
+            header.columns:
+              name: features
+              type: list
+              label: ADMIN.PANELS
+              fields:
+              
+                .icon_type:
+                  type: select
+                  label: ADMIN.ICON_TYPE
+                  default: default
+                  options:
+                    default:  'default'
+                    muted:    'muted'
+                    primary:  'primary'
+                    success:  'success'
+                    warning:  'warning'
+                    danger:   'danger'
+                    contrast: 'contrast'
+
+                .icon:
+                  type: text
+                  label: ADMIN.ICON
+
+                .header:
+                  type: text
+                  label: ADMIN.HEADER
+ 
+                .text:
+                  type: textarea
+                  label: ADMIN.TEXT
+
+          import-items@:
+            type: /partials/items
+            context: blueprints://pages
+          
+          import-block@:
+            type: /partials/block
+            context: blueprints://pages
+          
+          import-header@:
+            type: /partials/header
+            context: blueprints://pages
