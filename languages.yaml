@@ -69,8 +69,9 @@ en:
     SLIDENAV: Slidenav
     SLIDENAV_GUTTER: Gutter
     SLIDENAV_TYPE: Slidenav type
+    SLIDEDOTNAV_TYPE: Dotnav type
     SLIDER: Slider
-    SLIDES: Sludes
+    SLIDES: Slides
     SLIDESHOW: Slideshow
     SOCIAL_LINKS: Social links
     SUBTEXT: Subtext
@@ -87,6 +88,7 @@ en:
     AUTOPLAYINTERVAL: Autoplay interval
     CENTER: Center
     DURATION: Duration
+    HEADER: Script
     INFINITE: Infinite
     KENBURNS: KenBurns effect
     PAUSEONHOVER: Pause on hover

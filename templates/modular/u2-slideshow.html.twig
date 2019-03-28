@@ -82,7 +82,7 @@
 						<div>
 							<h3 class="uk-hidden-large">{{ item.header }}</h3>
 							<h3 class="uk-heading-large uk-visible-large">{{ item.header }}</h3>
-							<p>{{ item.text }}</p>
+							<p>{{ item.text|markdown }}</p>
 							{% for btn in item.buttons %}
 								{% set primary = btn.primary ? ' uk-button-primary' %}
 								{{ macros.uk_button(btn.url, btn.text, 'uk-hidden-large uk-margin-top' ~ primary) }}
