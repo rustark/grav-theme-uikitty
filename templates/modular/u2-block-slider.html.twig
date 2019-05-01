@@ -73,7 +73,7 @@
 
 									{# Panel text #}
 									{% if item.text %}
-										<p class="uk-text-left">{% if item.quotes %}<i class="uk-icon-quote-left uk-icon-small uk-align-left"></i>{% endif %}{{ item.text }}</p>
+										<p class="uk-text-left">{% if item.quotes %}<i class="uk-icon-quote-left uk-icon-small uk-align-left"></i>{% endif %}{{ item.text|markdown }}</p>
 									{% endif %}
 
 									{# Panel small text#}

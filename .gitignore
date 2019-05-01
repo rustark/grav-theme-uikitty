@@ -1,1 +1,3 @@
 .vscode/
+templates/modular/u2-block-yandex-money.html.twig
+blueprints/modular/u2-block-yandex-money.yaml

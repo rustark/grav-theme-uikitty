@@ -2,7 +2,9 @@
 
 {% set rounded = theme_var('rounded') ? ' uk-border-rounded' %}
 {% set grid_size = theme_var('grid') ? ' uk-grid-' ~ theme_var('grid') %}
+{% set grid_child = theme_var('grid') ? ' uk-grid-width-medium-1-' ~ page.header.columns_count %}
 {% set margin_top = theme_var('grid') ? ' uk-margin-' ~ theme_var('grid') ~ '-top' %}
+{% set margin_bottom = theme_var('grid') ? ' uk-margin-' ~ theme_var('grid') ~ '-bottom' %}
 
 {% set contrast = page.header.block == "primary" or page.header.block == "secondary" ? ' uk-contrast' %}
 {% set count = page.header.columns_count %}
@@ -36,12 +38,10 @@
         {{ page.header.description ? '<p class="uk-article-lead' ~ contrast ~ '">' ~ page.header.description ~ '</p>' }}
         {{ page.content ? page.content }}
 
-            {% if page.header.columns %}
-            {% for grid in page.header.columns|batch(count, null) %}
+            {% if page.header.columns %}            
 
-                <div class="uk-grid{{ divider ~ margin_top ~ grid_size }}" data-uk-grid-match="{target:'.uk-panel'}">
-
-                    {% for col in grid %}
+                <ul class="uk-grid{{ divider ~ grid_size ~ grid_child }}" data-uk-grid-match="{target:'.uk-panel'}">
+                {% for col in page.header.columns %}                    
 
                     {# Set panel background color #}
                     {% if col.type == 'box' %}
@@ -71,7 +71,7 @@
                         {% set badge_type = ' uk-badge' %}
                     {% endif %}
 
-                    <div class="uk-width-medium-1-{{ count }}">
+                    <li class="{{ margin_top }}">
                     <div class="uk-panel{{ type ~ rounded }}">
 
                         {# Panel badge #}
@@ -101,13 +101,11 @@
                             {{ macros.uk_button(btn.url, btn.text, 'uk-button-large uk-margin-small-top' ~ class) }}
                         {% endfor %}
                     </div>
-                    </div>
+                    </li>
 
-                    {% endfor %}
+                {% endfor %}
+                </ul>
 
-                </div>
-
-            {% endfor %}
             {% endif %}
 
     </article>

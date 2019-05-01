@@ -135,6 +135,14 @@ form:
       validate:
         type: bool
 
+    top_icon:
+      description: ADMIN.TOP_ICON_DESCRIPTION
+      label: ADMIN.TOP_ICON
+      markdown: true
+      placeholder: ADMIN.TOP_ICON_PLACEHOLDER
+      toggleable: true
+      type: text
+
     text:
       type: text
       label: ADMIN.TEXT

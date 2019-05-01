@@ -59,7 +59,7 @@
 
                                 {{ col.header ? '<h1 class="uk-article-title">' ~ col.header ~ '</h1>' }}
                                 {{ col.meta ? '<p class="uk-article-meta">' ~ col.meta ~ '</p>' }}
-                                {{ col.description ? '<p class="uk-article-lead">' ~ col.description ~ '</p>' }}
+                                {{ col.description ? '<p class="uk-article-lead' ~ contrast ~ '">' ~ col.description ~ '</p>' }}
                                 {{ col.text ? col.text|markdown }}
                                 
                                 {% if col.other.icons %}

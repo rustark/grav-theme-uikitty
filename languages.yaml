@@ -66,10 +66,10 @@ en:
     QUOTES: Quotes
     RADIUS: Radius
     ROUNDED: Rounded
+    SLIDEDOTNAV_TYPE: Dotnav type
     SLIDENAV: Slidenav
     SLIDENAV_GUTTER: Gutter
     SLIDENAV_TYPE: Slidenav type
-    SLIDEDOTNAV_TYPE: Dotnav type
     SLIDER: Slider
     SLIDES: Slides
     SLIDESHOW: Slideshow
@@ -78,6 +78,9 @@ en:
     TEXT: Text
     THEME_DESC: "**UIkit 2.27.5** is a lightweight and modular front-end framework for developing fast and powerful web interfaces."
     TITLE: Title
+    TOP_ICON: Top icon
+    TOP_ICON_DESCRIPTION: 'Place [vector icons](https://getuikit.com/v2/docs/icon.html) anywhere using an icon font.'
+    TOP_ICON_PLACEHOLDER: For instance, home
     TYPE: Type
     URL: Link
     WIDTH: Width
@@ -105,6 +108,36 @@ en:
     SVG: SVG
     ZOOM: Zoom
   ERROR: Error
+  MONEY:
+    ACCOUNT: Account
+    ACCOUNT_PLACEHOLDER: Wallet number
+    BALANCE_OF_PHONE: Balance of phone numbers
+    BALANCE_OF_PHONE_HELP: Beeline, MTS, Tele 2
+    BANK_CARD: Bank card
+    BANK_CARD_HELP: You pay the comission 2%
+    BUTTON_TEXT: Button text
+    BUYER: The sender will specify
+    COMMENTS: Comments
+    COMMENTS_PLACEHOLDER: Give a prompt, what to specify
+    DEFAULT_SUM: Amount to be prompted
+    DELIVERY_ADDRESS: Delivery address
+    DONATE: Donate
+    EMAIL_ADDRESS: Email address
+    FULL_NAME: Full name
+    GIVE: Give
+    LINK_FOR_REDIRECT: Link for redirecting
+    LINK_FOR_REDIRECT_HELP: If required, we will return the person back to your site.
+    LINK_FOR_REDIRECT_PLACEHOLDER: https://
+    MOBILE_PHONE: Mobile phone
+    PAY: Pay
+    PURPOSE_OF_PAYMENT: Purpose of payment
+    PURPOSE_OF_PAYMENT_PLACEHOLDER: For instance, contribution for competition
+    SELLER: I will specify
+    SEND: Send
+    TRANSFER: Transfer
+    TRANSFER_METHOD: Transfer method
+    WHAT_TO_ASK: What to ask from the sender
+    YANDEX_MONEY: Yandex.Money
 
 ru:
   ADMIN:
@@ -187,6 +220,9 @@ ru:
     TEXT: Текст
     THEME_DESC: "**UIkit 2.27.5** представляет собой легкий и модульный front-end фреймворк для разработки быстрых и мощных веб-интерфейсов."
     TITLE: Заголовок
+    TOP_ICON: Иконка вверх
+    TOP_ICON_DESCRIPTION: 'Спискок всех иконок на [официальном сайте.](https://getuikit.com/v2/docs/icon.html)'
+    TOP_ICON_PLACEHOLDER: Например, home
     TYPE: Тип
     URL: Ссылка
     WIDTH: Ширина
@@ -213,3 +249,33 @@ ru:
     SVG: SVG
     ZOOM: Увеличение
   ERROR: Ошибка
+  MONEY:
+    ACCOUNT: Аккаунт
+    ACCOUNT_PLACEHOLDER: Номер кошелька
+    BALANCE_OF_PHONE: Счет телефона
+    BALANCE_OF_PHONE_HELP: Билайн, МТС, Теле 2
+    BANK_CARD: Банковская карта
+    BANK_CARD_HELP: Комиссия с вас 2%
+    BUTTON_TEXT: Текст кнопки
+    BUYER: Отправитель укажет
+    COMMENTS: Комментарий
+    COMMENTS_PLACEHOLDER: Подскажите человеку, что написать
+    DEFAULT_SUM: Сумма по умолчанию
+    DELIVERY_ADDRESS: Адрес доставки
+    DONATE: Пожертвовать
+    EMAIL_ADDRESS: Эл.почта
+    FULL_NAME: ФИО
+    GIVE: Подарить
+    LINK_FOR_REDIRECT: Ссылка для редиректа
+    LINK_FOR_REDIRECT_HELP: Если нужно, после перевода вернем человека на ваш сайт.
+    LINK_FOR_REDIRECT_PLACEHOLDER: https://
+    MOBILE_PHONE: Мобильный телефон
+    PAY: Оплата
+    PURPOSE_OF_PAYMENT: Назначение перевода
+    PURPOSE_OF_PAYMENT_PLACEHOLDER: Например, взнос за соревнование
+    SELLER: Я укажу
+    SEND: Отправить
+    TRANSFER: Перевести
+    TRANSFER_METHOD: Способы перевода
+    WHAT_TO_ASK: Что попросить у отправителя
+    YANDEX_MONEY: Яндекс.Деньги    
