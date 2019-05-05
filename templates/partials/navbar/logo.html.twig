@@ -2,6 +2,12 @@
 {% set custom_logo_width = theme_var('custom_logo_width') ? theme_var('custom_logo_width') : 80 %}
 {% set custom_logo_mobile_width = theme_var('custom_logo_mobile_width') ? theme_var('custom_logo_mobile_width') : 30 %}
 
+{% set logo_desktop = theme_var('custom_logo') %}
+{% set logo_file_desktop = (logo_desktop|first).name %}
+
+{% set logo_mobile = theme_var('custom_logo_mobile') %}
+{% set logo_file_mobile = (logo_mobile|first).name %}
+
 {#
 <div class="uk-navbar-content uk-navbar-{{ align }} uk-visible-large">
     {% set logo = theme_var(mobile ? 'custom_logo_mobile' : 'custom_logo') %}
@@ -17,26 +23,23 @@
 #}
 
 <div class="uk-navbar-content uk-visible-large uk-navbar-{{ align }}">
-    {% set logo_desktop = theme_var('custom_logo') %}
     <a href="{{ home_url }}" class="navbar-brand">
     {% if logo_desktop %}
-        {% set logo_file_desktop = (logo_desktop|first).name %}
         <img src="{{ url('theme://images/logo/' ~ logo_file_desktop)  }}" alt="{{ site.name }}" class="uk-visible-large" width="{{ custom_logo_width }}" />
+        <img src="{{ url('theme://images/logo/' ~ logo_file_mobile)  }}" alt="{{ site.name }}" class="uk-hidden-large" width="{{ custom_logo_mobile_width }}" />
     {% else %}
-        <img src="{{ url('theme://images/logo.svg') }}" alt="{{ site.name }}" class="uk-visible-large" width="30" />
+        <img src="{{ url('theme://images/logo.svg') }}" alt="{{ site.name }}" width="30" />
     {% endif %}
     </a>
 </div>
 
 {% if menu_big == false %}
 <div class="uk-navbar-content uk-hidden-large uk-navbar-left">
-    {% set logo_mobile = theme_var('custom_logo_mobile') %}
     <a href="{{ home_url }}" class="navbar-brand">
     {% if logo_mobile %}
-        {% set logo_file_mobile = (logo_mobile|first).name %}
         <img src="{{ url('theme://images/logo/' ~ logo_file_mobile)  }}" alt="{{ site.name }}" class="uk-hidden-large" width="30" />
     {% else %}
-        <img src="{{ url('theme://images/logo.svg') }}" alt="{{ site.name }}" class="uk-visible-large" width="30" />
+        <img src="{{ url('theme://images/logo.svg') }}" alt="{{ site.name }}" width="30" />
     {% endif %}
     </a>
 </div>
