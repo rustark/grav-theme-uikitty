@@ -1,6 +1,7 @@
 {% set rounded = theme_var('rounded') ? ' uk-border-rounded' %}
 {% set grid_size = theme_var('grid') ? ' uk-grid-' ~ theme_var('grid') %}
 {% set margin_top = theme_var('grid') ? ' uk-margin-' ~ theme_var('grid') ~ '-top' %}
+{% set grid_child = theme_var('grid') ? ' uk-grid-width-medium-1-' ~ page.header.columns_count %}
 
 {% set contrast = page.header.block == "primary" or page.header.block == "secondary" ? ' uk-contrast' %}
 {% set count = page.header.columns_count %}
@@ -31,11 +32,9 @@
         {{ page.content ? page.content }}
 
             {% if page.header.columns %}
-            {% for grid in page.header.columns|batch(count, null) %}
-
-                <div class="uk-grid{{ divider ~ grid_size ~ margin_top }}" data-uk-grid-match="{target:'.uk-panel'}">
-
-                    {% for col in grid %}
+            <ul class="uk-grid{{ divider ~ grid_size ~ grid_child }}" data-uk-grid-match="{target:'.uk-panel'}">
+                
+                {% for col in page.header.columns %}                   
 
                     {# Set icon type #}
                     {% if col.icon_type == 'muted' %}
@@ -54,8 +53,8 @@
                         {% set icon_type = '' %}
                     {% endif %}
 
-                    <div class="uk-width-medium-1-{{ count }}">
-                        <div class="uk-panel uk-margin-large-bottom">
+                    <li class="{{ margin_top }}">
+                        <div class="uk-panel"> 
 
                             {% if page.header.icons_align == 'left' %}
 
@@ -79,13 +78,11 @@
                             {% endif %}   
 
                         </div>
-                    </div>
+                    </li>             
 
-                    {% endfor %}
-
-                </div>
-
-            {% endfor %}
+                {% endfor %}
+                
+            </ul>
             {% endif %}
 
     </article>
